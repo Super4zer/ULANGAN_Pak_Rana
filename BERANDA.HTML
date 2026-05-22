@@ -1,409 +1,499 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Beranda — Muhammad Fachreza Aryanagara</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --bg:        #0c0f0a;
-      --surface:   #141810;
-      --border:    #2a2e25;
-      --gold:      #c9a84c;
-      --gold-dim:  #7a6330;
-      --cream:     #f0ead8;
-      --muted:     #6b7060;
-      --accent:    #4a7c59;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beranda — Muhammad Fachreza Aryanagara</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0c0f0a;
+        --surface: #141810;
+        --border: #2a2e25;
+        --gold: #c9a84c;
+        --gold-dim: #7a6330;
+        --cream: #f0ead8;
+        --muted: #6b7060;
+        --accent: #4a7c59;
+      }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    html { scroll-behavior: smooth; }
+      html {
+        scroll-behavior: smooth;
+      }
 
-    body {
-      background: var(--bg);
-      color: var(--cream);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+      body {
+        background: var(--bg);
+        color: var(--cream);
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
 
-    /* ── Noise overlay ── */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      background-size: 180px;
-      pointer-events: none;
-      z-index: 0;
-    }
+      /* ── Noise overlay ── */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        background-size: 180px;
+        pointer-events: none;
+        z-index: 0;
+      }
 
-    /* ── Ambient glow ── */
-    .glow {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(120px);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .glow-1 { width: 500px; height: 500px; background: rgba(74,124,89,0.12); top: -150px; right: -100px; }
-    .glow-2 { width: 400px; height: 400px; background: rgba(201,168,76,0.07); bottom: 0; left: -80px; }
+      /* ── Ambient glow ── */
+      .glow {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(120px);
+        pointer-events: none;
+        z-index: 0;
+      }
+      .glow-1 {
+        width: 500px;
+        height: 500px;
+        background: rgba(74, 124, 89, 0.12);
+        top: -150px;
+        right: -100px;
+      }
+      .glow-2 {
+        width: 400px;
+        height: 400px;
+        background: rgba(201, 168, 76, 0.07);
+        bottom: 0;
+        left: -80px;
+      }
 
-    /* ── Layout ── */
-    .wrapper {
-      position: relative;
-      z-index: 1;
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 28px 80px;
-    }
+      /* ── Layout ── */
+      .wrapper {
+        position: relative;
+        z-index: 1;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 28px 80px;
+      }
 
-    /* ── Header ── */
-    header {
-      padding: 56px 0 80px;
-      text-align: center;
-      animation: fadeDown 0.8s ease both;
-    }
+      /* ── Header ── */
+      header {
+        padding: 56px 0 80px;
+        text-align: center;
+        animation: fadeDown 0.8s ease both;
+      }
 
-    .site-label {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 20px;
-    }
+      .site-label {
+        font-family: "DM Sans", sans-serif;
+        font-size: 10px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 20px;
+      }
 
-    header h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 6vw, 4rem);
-      font-weight: 600;
-      line-height: 1.1;
-      color: var(--cream);
-      margin-bottom: 16px;
-    }
+      header h1 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        font-weight: 600;
+        line-height: 1.1;
+        color: var(--cream);
+        margin-bottom: 16px;
+      }
 
-    header h1 span {
-      display: block;
-      font-size: 0.55em;
-      font-weight: 300;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-      margin-top: 6px;
-    }
+      header h1 span {
+        display: block;
+        font-size: 0.55em;
+        font-weight: 300;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+        margin-top: 6px;
+      }
 
-    .divider {
-      width: 60px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: 28px auto;
-    }
+      .divider {
+        width: 60px;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gold),
+          transparent
+        );
+        margin: 28px auto;
+      }
 
-    header p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      max-width: 420px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
+      header p {
+        font-size: 0.9rem;
+        color: var(--muted);
+        max-width: 420px;
+        margin: 0 auto;
+        line-height: 1.7;
+      }
 
-    /* ── Section label ── */
-    .section-label {
-      font-size: 10px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--gold-dim);
-      margin-bottom: 32px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
+      /* ── Section label ── */
+      .section-label {
+        font-size: 10px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--gold-dim);
+        margin-bottom: 32px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .section-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
 
-    /* ── Cards grid ── */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin-bottom: 72px;
-    }
+      /* ── Cards grid ── */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        margin-bottom: 72px;
+      }
 
-    /* ── Base card ── */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 40px 36px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-      animation: fadeUp 0.7s ease both;
-    }
-    .card:nth-child(2) { animation-delay: 0.12s; }
+      /* ── Base card ── */
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 40px 36px;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.35s ease,
+          border-color 0.35s ease,
+          box-shadow 0.35s ease;
+        animation: fadeUp 0.7s ease both;
+      }
+      .card:nth-child(2) {
+        animation-delay: 0.12s;
+      }
 
-    .card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(201,168,76,0.04) 0%, transparent 60%);
-      pointer-events: none;
-    }
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(201, 168, 76, 0.04) 0%,
+          transparent 60%
+        );
+        pointer-events: none;
+      }
 
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: var(--gold-dim);
-      box-shadow: 0 24px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,168,76,0.08);
-    }
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: var(--gold-dim);
+        box-shadow:
+          0 24px 48px rgba(0, 0, 0, 0.4),
+          0 0 0 1px rgba(201, 168, 76, 0.08);
+      }
 
-    /* ── Owner card highlight ── */
-    .card.owner {
-      border-color: var(--gold-dim);
-    }
-    .card.owner::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    }
+      /* ── Owner card highlight ── */
+      .card.owner {
+        border-color: var(--gold-dim);
+      }
+      .card.owner::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gold),
+          transparent
+        );
+      }
 
-    .card-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 9px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      background: rgba(201,168,76,0.08);
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: 2px;
-      padding: 4px 10px;
-      margin-bottom: 28px;
-    }
-    .card-badge .dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: var(--gold);
-    }
+      .card-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 9px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        background: rgba(201, 168, 76, 0.08);
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        border-radius: 2px;
+        padding: 4px 10px;
+        margin-bottom: 28px;
+      }
+      .card-badge .dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
 
-    .card-badge.collab {
-      color: var(--accent);
-      background: rgba(74,124,89,0.08);
-      border-color: rgba(74,124,89,0.2);
-    }
-    .card-badge.collab .dot { background: var(--accent); }
+      .card-badge.collab {
+        color: var(--accent);
+        background: rgba(74, 124, 89, 0.08);
+        border-color: rgba(74, 124, 89, 0.2);
+      }
+      .card-badge.collab .dot {
+        background: var(--accent);
+      }
 
-    .card-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.55rem;
-      font-weight: 600;
-      color: var(--cream);
-      line-height: 1.25;
-      margin-bottom: 8px;
-    }
+      .card-name {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.55rem;
+        font-weight: 600;
+        color: var(--cream);
+        line-height: 1.25;
+        margin-bottom: 8px;
+      }
 
-    .card-sub {
-      font-size: 0.78rem;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
+      .card-sub {
+        font-size: 0.78rem;
+        color: var(--muted);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 28px;
+      }
 
-    .card-desc {
-      font-size: 0.85rem;
-      color: #8a9080;
-      line-height: 1.75;
-      border-top: 1px solid var(--border);
-      padding-top: 20px;
-    }
+      .card-desc {
+        font-size: 0.85rem;
+        color: #8a9080;
+        line-height: 1.75;
+        border-top: 1px solid var(--border);
+        padding-top: 20px;
+      }
 
-    .card-icon {
-      position: absolute;
-      bottom: 28px; right: 28px;
-      font-size: 2.8rem;
-      opacity: 0.06;
-      pointer-events: none;
-      user-select: none;
-    }
+      .card-icon {
+        position: absolute;
+        bottom: 28px;
+        right: 28px;
+        font-size: 2.8rem;
+        opacity: 0.06;
+        pointer-events: none;
+        user-select: none;
+      }
 
-    /* ── Navigation card / CTA ── */
-    .nav-section { animation: fadeUp 0.7s ease 0.25s both; }
+      /* ── Navigation card / CTA ── */
+      .nav-section {
+        animation: fadeUp 0.7s ease 0.25s both;
+      }
 
-    .nav-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 36px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      text-decoration: none;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-    }
+      .nav-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 36px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.35s ease,
+          border-color 0.35s ease,
+          box-shadow 0.35s ease;
+      }
 
-    .nav-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(74,124,89,0.05) 0%, transparent 70%);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.35s ease;
-    }
-    .nav-card:hover::before { opacity: 1; }
+      .nav-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(74, 124, 89, 0.05) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+      }
+      .nav-card:hover::before {
+        opacity: 1;
+      }
 
-    .nav-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--accent);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(74,124,89,0.12);
-    }
+      .nav-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--accent);
+        box-shadow:
+          0 20px 40px rgba(0, 0, 0, 0.35),
+          0 0 0 1px rgba(74, 124, 89, 0.12);
+      }
 
-    .nav-card-left {}
+      .nav-card-left {
+      }
 
-    .nav-card-eyebrow {
-      font-size: 9px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
+      .nav-card-eyebrow {
+        font-size: 9px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 10px;
+      }
 
-    .nav-card-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.55rem;
-      font-weight: 600;
-      color: var(--cream);
-      margin-bottom: 6px;
-    }
+      .nav-card-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.55rem;
+        font-weight: 600;
+        color: var(--cream);
+        margin-bottom: 6px;
+      }
 
-    .nav-card-sub {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
+      .nav-card-sub {
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
 
-    .nav-card-arrow {
-      flex-shrink: 0;
-      width: 52px; height: 52px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--accent);
-      font-size: 1.2rem;
-      transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
-    }
-    .nav-card:hover .nav-card-arrow {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-      transform: translateX(3px);
-    }
+      .nav-card-arrow {
+        flex-shrink: 0;
+        width: 52px;
+        height: 52px;
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        font-size: 1.2rem;
+        transition:
+          background 0.3s ease,
+          border-color 0.3s ease,
+          transform 0.3s ease;
+      }
+      .nav-card:hover .nav-card-arrow {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+        transform: translateX(3px);
+      }
 
-    /* ── Footer ── */
-    footer {
-      text-align: center;
-      padding: 40px 0 0;
-      font-size: 0.75rem;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      animation: fadeUp 0.7s ease 0.35s both;
-    }
-    footer strong { color: var(--gold); font-weight: 400; }
+      /* ── Footer ── */
+      footer {
+        text-align: center;
+        padding: 40px 0 0;
+        font-size: 0.75rem;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+        animation: fadeUp 0.7s ease 0.35s both;
+      }
+      footer strong {
+        color: var(--gold);
+        font-weight: 400;
+      }
 
-    /* ── Animations ── */
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-</head>
-<body>
+      /* ── Animations ── */
+      @keyframes fadeDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
 
-  <div class="glow glow-1"></div>
-  <div class="glow glow-2"></div>
+    <div class="wrapper">
+      <!-- Header -->
+      <header>
+        <p class="site-label">Portal Akademik</p>
+        <h1>
+          Selamat Datang
+          <span>Sistem Informasi Nilai &amp; Profil</span>
+        </h1>
+        <div class="divider"></div>
+        <p>
+          Halaman beranda ini menampilkan identitas tim pengembang beserta akses
+          menuju halaman nilai akademik.
+        </p>
+      </header>
 
-  <div class="wrapper">
+      <!-- Member Cards -->
+      <p class="section-label">Tim Pengembang</p>
 
-    <!-- Header -->
-    <header>
-      <p class="site-label">Portal Akademik</p>
-      <h1>
-        Selamat Datang
-        <span>Sistem Informasi Nilai &amp; Profil</span>
-      </h1>
-      <div class="divider"></div>
-      <p>Halaman beranda ini menampilkan identitas tim pengembang beserta akses menuju halaman nilai akademik.</p>
-    </header>
-
-    <!-- Member Cards -->
-    <p class="section-label">Tim Pengembang</p>
-
-    <div class="cards">
-
-      <!-- Owner -->
-      <div class="card owner">
-        <div class="card-badge">
-          <span class="dot"></span>
-          Owner · Beranda
+      <div class="cards">
+        <!-- Owner -->
+        <div class="card owner">
+          <div class="card-badge">
+            <span class="dot"></span>
+            Owner · Beranda
+          </div>
+          <div class="card-name">Muhammad Fachreza<br />Aryanagara</div>
+          <div class="card-sub">Pengembang Utama</div>
+          <div class="card-desc">
+            Bertanggung jawab atas halaman <strong>beranda.html</strong> —
+            arsitektur antarmuka, desain visual, serta pengalaman pengguna
+            secara keseluruhan.
+          </div>
+          <div class="card-icon">◈</div>
         </div>
-        <div class="card-name">Muhammad Fachreza<br>Aryanagara</div>
-        <div class="card-sub">Pengembang Utama</div>
-        <div class="card-desc">
-          Bertanggung jawab atas halaman <strong>beranda.html</strong> — arsitektur antarmuka, desain visual, serta pengalaman pengguna secara keseluruhan.
+
+        <!-- Collaborator -->
+        <div class="card collab">
+          <div class="card-badge collab">
+            <span class="dot"></span>
+            Kolaborator · Nilai
+          </div>
+          <div class="card-name">Ridho Budi<br />Muta'ali</div>
+          <div class="card-sub">Pengembang Kolaborator</div>
+          <div class="card-desc">
+            Bertanggung jawab atas halaman <strong>NILAI.HTML</strong> —
+            pengelolaan data nilai akademik, tampilan tabel, serta rekapitulasi
+            hasil studi.
+          </div>
+          <div class="card-icon">◇</div>
         </div>
-        <div class="card-icon">◈</div>
       </div>
 
-      <!-- Collaborator -->
-      <div class="card collab">
-        <div class="card-badge collab">
-          <span class="dot"></span>
-          Kolaborator · Nilai
-        </div>
-        <div class="card-name">Ridho Budi<br>Muta'ali</div>
-        <div class="card-sub">Pengembang Kolaborator</div>
-        <div class="card-desc">
-          Bertanggung jawab atas halaman <strong>nilai.html</strong> — pengelolaan data nilai akademik, tampilan tabel, serta rekapitulasi hasil studi.
-        </div>
-        <div class="card-icon">◇</div>
+      <!-- Navigation CTA -->
+      <div class="nav-section">
+        <p class="section-label">Navigasi Halaman</p>
+        <a href="NILAI.HTML" class="nav-card">
+          <div class="nav-card-left">
+            <div class="nav-card-eyebrow">Halaman Kolaborator</div>
+            <div class="nav-card-title">Lihat Nilai Akademik</div>
+            <div class="nav-card-sub">NILAI.HTML — Ridho Budi Muta'ali</div>
+          </div>
+          <div class="nav-card-arrow">→</div>
+        </a>
       </div>
 
+      <!-- Footer -->
+      <footer>
+        <p>
+          Dikembangkan oleh <strong>Muhammad Fachreza Aryanagara</strong> &amp;
+          <strong>Ridho Budi Muta'ali</strong>
+        </p>
+      </footer>
     </div>
-
-    <!-- Navigation CTA -->
-    <div class="nav-section">
-      <p class="section-label">Navigasi Halaman</p>
-      <a href="nilai.html" class="nav-card">
-        <div class="nav-card-left">
-          <div class="nav-card-eyebrow">Halaman Kolaborator</div>
-          <div class="nav-card-title">Lihat Nilai Akademik</div>
-          <div class="nav-card-sub">nilai.html — Ridho Budi Muta'ali</div>
-        </div>
-        <div class="nav-card-arrow">→</div>
-      </a>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-      <p>Dikembangkan oleh <strong>Muhammad Fachreza Aryanagara</strong> &amp; <strong>Ridho Budi Muta'ali</strong></p>
-    </footer>
-
-  </div>
-
-</body>
+  </body>
 </html>
