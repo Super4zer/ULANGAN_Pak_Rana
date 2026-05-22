@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar Nilai Akademik — Ridho Budi Muta'ali</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Menggunakan token warna bangsawan yang sama dengan BERANDA.html */
+      :root {
+        --bg: #0c0f0a;
+        --surface: #141810;
+        --border: #2a2e25;
+        --gold: #c9a84c;
+        --gold-dim: #7a6330;
+        --cream: #f0ead8;
+        --muted: #6b7060;
+        --accent: #4a7c59;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--cream);
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        min-height: 100vh;
+        overflow-x: hidden;
+        padding: 0 0 80px;
+      }
+
+      /* ── Noise overlay (Efek Tekstur Kasar Mewah) ── */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        background-size: 180px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* ── Ambient glow ── */
+      .glow {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(120px);
+        pointer-events: none;
+        z-index: 0;
+      }
+      .glow-1 {
+        width: 500px;
+        height: 500px;
+        background: rgba(201, 168, 76, 0.08);
+        top: -150px;
+        left: -100px;
+      }
+      .glow-2 {
+        width: 400px;
+        height: 400px;
+        background: rgba(74, 124, 89, 0.1);
+        bottom: 10%;
+        right: -80px;
+      }
+
+      /* ── Layout ── */
+      .wrapper {
+        position: relative;
+        z-index: 1;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 28px;
+      }
+
+      /* ── Header ── */
+      header {
+        padding: 56px 0 40px;
+        text-align: center;
+        animation: fadeDown 0.8s ease both;
+      }
+
+      .site-label {
+        font-size: 10px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 20px;
+      }
+
+      header h1 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.2rem, 5vw, 3.5rem);
+        font-weight: 600;
+        line-height: 1.1;
+        color: var(--cream);
+        margin-bottom: 16px;
+      }
+
+      header h1 span {
+        display: block;
+        font-size: 0.55em;
+        font-weight: 300;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+        margin-top: 6px;
+      }
+
+      .divider {
+        width: 60px;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gold),
+          transparent
+        );
+        margin: 24px auto;
+      }
+
+      /* ── Tombol Back Eksklusif ── */
+      .btn-back-container {
+        padding-top: 40px;
+        animation: fadeDown 0.8s ease both;
+      }
+
+      .btn-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+        border: 1px solid var(--border);
+        background: var(--surface);
+        padding: 10px 20px;
+        border-radius: 4px;
+        transition: all 0.35s ease;
+      }
+
+      .btn-back:hover {
+        color: var(--gold);
+        border-color: var(--gold-dim);
+        transform: translateX(-4px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      /* ── Section Label ── */
+      .section-label {
+        font-size: 10px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--gold-dim);
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        animation: fadeUp 0.7s ease both;
+      }
+      .section-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      /* ── Desain Tabel Aristokrat ── */
+      .table-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 32px;
+        margin-bottom: 48px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        position: relative;
+        overflow: hidden;
+        animation: fadeUp 0.7s ease 0.1s both;
+      }
+
+      .table-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gold-dim),
+          transparent
+        );
+      }
+
+      .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 0.9rem;
+      }
+
+      thead tr {
+        border-bottom: 2px solid var(--gold-dim);
+      }
+
+      th {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--gold);
+        padding: 16px 12px;
+        letter-spacing: 0.05em;
+      }
+
+      td {
+        padding: 18px 12px;
+        border-bottom: 1px solid rgba(42, 46, 37, 0.5);
+        color: #bfaea3; /* Teks krem kalem */
+        font-weight: 300;
+      }
+
+      tbody tr:hover {
+        background: rgba(254, 250, 232, 0.02);
+        color: var(--cream);
+      }
+
+      tbody tr:hover td {
+        color: var(--cream);
+      }
+
+      /* ── Badges Kelulusan Berkelas ── */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 9px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        border-radius: 2px;
+        padding: 4px 10px;
+        font-weight: 500;
+      }
+
+      .badge-success {
+        color: var(--accent);
+        background: rgba(74, 124, 89, 0.08);
+        border: 1px solid rgba(74, 124, 89, 0.2);
+      }
+
+      .badge-danger {
+        color: #b91c1c;
+        background: rgba(185, 28, 28, 0.06);
+        border: 1px solid rgba(185, 28, 28, 0.2);
+      }
+
+      .badge .dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+      }
+      .badge-success .dot {
+        background: var(--accent);
+      }
+      .badge-danger .dot {
+        background: #b91c1c;
+      }
+
+      /* Helper Utility */
+      .text-center {
+        text-align: center;
+      }
+      .font-serif {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.1rem;
+        color: var(--cream);
+      }
+      .font-bold {
+        font-weight: 500;
+        color: var(--cream);
+      }
+
+      /* ── Footer ── */
+      footer {
+        text-align: center;
+        padding: 40px 0 0;
+        font-size: 0.75rem;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+        animation: fadeUp 0.7s ease 0.2s both;
+      }
+      footer strong {
+        color: var(--gold);
+        font-weight: 400;
+      }
+
+      /* Animations */
+      @keyframes fadeDown {
+        from {
+          opacity: 0;
+          transform: translateY(-15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <div class="wrapper">
+      <div class="btn-back-container">
+        <a href="BERANDA.HTML" class="btn-back">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Kembali ke Beranda
+        </a>
+      </div>
+
+      <header>
+        <p class="site-label">Rekapitulasi Studi</p>
+        <h1>
+          Daftar Nilai Akademik
+          <span>Hasil Ujian Akhir &amp; Evaluasi Kompetensi</span>
+        </h1>
+        <div class="divider"></div>
+      </header>
+
+      <p class="section-label">Lembar Hasil Studi — Kelas XI RPL 1</p>
+
+      <div class="table-card">
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th class="text-center" style="width: 60px">No</th>
+                <th class="text-center" style="width: 100px">NIS</th>
+                <th>Nama Lengkap</th>
+                <th class="text-center">Tugas</th>
+                <th class="text-center">UTS</th>
+                <th class="text-center">UAS</th>
+                <th class="text-center">Rata-rata</th>
+                <th class="text-center" style="width: 140px">
+                  Status Akreditasi
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center var-muted">01</td>
+                <td class="text-center font-bold">202601</td>
+                <td class="font-serif">Atha Rahmansyah</td>
+                <td class="text-center">90</td>
+                <td class="text-center">85</td>
+                <td class="text-center">88</td>
+                <td class="text-center font-bold" style="color: var(--gold)">
+                  87.6
+                </td>
+                <td class="text-center">
+                  <span class="badge badge-success"
+                    ><span class="dot"></span>Lulus</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center var-muted">02</td>
+                <td class="text-center font-bold">202602</td>
+                <td class="font-serif">Ridho Budi Muta'ali</td>
+                <td class="text-center">95</td>
+                <td class="text-center">90</td>
+                <td class="text-center">92</td>
+                <td class="text-center font-bold" style="color: var(--gold)">
+                  92.3
+                </td>
+                <td class="text-center">
+                  <span class="badge badge-success"
+                    ><span class="dot"></span>Lulus</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center var-muted">03</td>
+                <td class="text-center font-bold">202603</td>
+                <td class="font-serif">Reza Aditya</td>
+                <td class="text-center">80</td>
+                <td class="text-center">78</td>
+                <td class="text-center">85</td>
+                <td class="text-center font-bold" style="color: var(--gold)">
+                  81.0
+                </td>
+                <td class="text-center">
+                  <span class="badge badge-success"
+                    ><span class="dot"></span>Lulus</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center var-muted">04</td>
+                <td class="text-center font-bold">202604</td>
+                <td class="font-serif">Kevin Sanjaya</td>
+                <td class="text-center">70</td>
+                <td class="text-center">65</td>
+                <td class="text-center">68</td>
+                <td class="text-center font-bold" style="color: #ef4444">
+                  67.6
+                </td>
+                <td class="text-center">
+                  <span class="badge badge-danger"
+                    ><span class="dot"></span>Remedial</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center var-muted">05</td>
+                <td class="text-center font-bold">202605</td>
+                <td class="font-serif">Zaky Alamsyah</td>
+                <td class="text-center">88</td>
+                <td class="text-center">82</td>
+                <td class="text-center">80</td>
+                <td class="text-center font-bold" style="color: var(--gold)">
+                  83.3
+                </td>
+                <td class="text-center">
+                  <span class="badge badge-success"
+                    ><span class="dot"></span>Lulus</span
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          Dikembangkan oleh <strong>Muhammad Fachreza Aryanagara</strong> &amp;
+          <strong>Ridho Budi Muta'ali</strong>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
